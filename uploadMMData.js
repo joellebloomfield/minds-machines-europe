@@ -12,10 +12,8 @@ let baseUrl;
 let apiUrl = baseUrl+'/v1/collections/';
 let uaaUuid;
 
-const collNames = ['110KV_Underground_Cable', '110KV_Underground_Ground_Mounted_Asset', '38KV_Underground_Cable',
-  'LV_Overhead_Asset', 'LV_Single_Phase_Overhead_Line', 'LV_Three_Phase_Overhead_Line', 'LV_Underground_Cable',
-  'LV_Underground_Ground_Mounted_Asset', 'MV_Three_Phase_Overhead_Line', 'MV_Underground_Cable',
-  'MV_Underground_Ground_Mounted_Asset'];
+const collNames = ['LV_Overhead_Asset', 'LV_Single_Phase_Overhead_Line', 'LV_Three_Phase_Overhead_Line', 'LV_Underground_Cable',
+  'LV_Underground_Ground_Mounted_Asset', 'MV_Underground_Cable', 'MV_Underground_Ground_Mounted_Asset'];
 
 
 
@@ -115,7 +113,7 @@ function main() {
 
   for (let collName of collNames) {
     deleteCollection(collName, username, password, zoneId, tenantId).then(() => {
-      addCollection(collName, fs.readFileSync(`${folder}/Combined.${collName}.geojson`, 'utf-8'), username, password, zoneId, tenantId);
+      addCollection(collName, fs.readFileSync(`${folder}/Clipped.${collName}.geojson`, 'utf-8'), username, password, zoneId, tenantId);
     })
   }
 }
