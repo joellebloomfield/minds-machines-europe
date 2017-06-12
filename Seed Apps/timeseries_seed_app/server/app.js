@@ -71,6 +71,8 @@ app.listen(config.port, function () {
     console.log("Server is listening at: " + config.appURL);
 });
 
+
+
 /****************************************************************************
  SET UP EXPRESS ROUTES
  *****************************************************************************/
@@ -140,5 +142,41 @@ app.use(function (err, req, res, next) { // eslint-disable-line no-unused-vars
         });
     }
 });
+
+
+//getting blobstore
+var http = require("https");
+
+var options = {
+  "method": "GET",
+  "hostname": "mmeurope-blob.run.aws-usw02-pr.ice.predix.io",
+  "port": null,
+  "path": "/v1/blob/train.csv",
+  "headers": {
+    "cache-control": "no-cache",
+    "postman-token": "2345ee62-70c9-b250-9fa8-6c32383d77a0"
+  }
+};
+
+var req = http.request(options, function (res) {
+  var chunks = [];
+	console.log("debut");
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+
+    var body = Buffer.concat(chunks);
+    console.log("coucou");
+    console.log(body.toString());
+  });
+});
+
+req.end();
+
+
+
+
 
 module.exports = app;
